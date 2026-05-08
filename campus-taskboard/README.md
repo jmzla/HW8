@@ -1,255 +1,309 @@
-# Campus Task Board API
+# Campus Task Board API Documentation
 
-## 📌 Project Description
+ Project Description
+Campus Task Board API is a Spring Boot REST API application used for managing campus-related tasks.  
+The API supports creating, updating, retrieving, deleting, and restoring tasks while providing validation, security, logging, soft delete functionality, testing, and API documentation.
 
-This project is a Spring Boot REST API for managing tasks.
-Homework 7 extends the previous version by adding advanced features such as exception handling, DTOs, soft delete, request logging, and health monitoring.
-
-The API allows users to create, update, delete, and retrieve tasks while ensuring clean architecture and robust error handling.
-
----
-
-## 🛠 Technologies Used
-
-* Java 21
-* Spring Boot
-* Spring Data JPA
-* H2 Database
-* Maven
-* Lombok
-* Spring Validation
-* Spring Boot Actuator
-* Postman (for testing)
+This project was developed for Homework 8 and builds upon Homework 7 enhancements.
 
 ---
 
-## 🚀 Features
-
-### ✅ Exception Handling
-
-* Custom exceptions:
-
-    * `TaskNotFoundException`
-    * `InvalidTaskDataException`
-* Global exception handler using `@RestControllerAdvice`
-* Handles:
-
-    * 404 Not Found
-    * 400 Validation errors
-    * 500 Internal Server Error
-* Returns structured JSON error responses
+Technologies Used
+- 
+- Java 21
+- Spring Boot 3
+- Spring Security
+- Spring Data JPA
+- Spring Validation
+- H2 Database
+- Swagger / OpenAPI
+- Maven
+- JUnit 5
+- MockMvc
 
 ---
 
-### ✅ DTOs (Data Transfer Objects)
+Features
 
-* `TaskRequest` – handles incoming requests with validation
-* `TaskResponse` – formats outgoing responses
-* Separates API layer from database entity
-* Prevents exposing internal fields like `deleted`
-
----
-
-### ✅ Soft Delete
-
-* Tasks are not permanently removed from the database
-* A `deleted` field is added to the Task entity
-* Deleting a task sets `deleted = true`
-* Only non-deleted tasks are returned in queries
-* Restore endpoint allows recovery of deleted tasks
-
----
-
-### ✅ Request Logging
-
-* Logs every API request:
-
-    * HTTP method
-    * Request URI
-    * Response status
-    * Execution time
-* Helps with debugging and monitoring
+- RESTful API design
+- Spring Security integration
+- CORS configuration
+- API versioning
+- DTO pattern
+- Validation with custom validators
+- Global exception handling
+- Soft delete functionality
+- Swagger/OpenAPI documentation
+- Integration testing
+- H2 in-memory database
+- Spring Data JPA
+- Request logging
+- Actuator monitoring endpoints
 
 ---
 
-### ✅ Actuator (Health Monitoring)
+Base URL
 
-* Provides production-ready monitoring endpoints:
-
-    * `/actuator/health`
-    * `/actuator/info`
-    * `/actuator/metrics`
-* Used to check application status and performance
-
----
-
-## ▶️ How to Run the Application
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/jmzla/HW7.git
-```
-
-2. Open the project in IntelliJ IDEA or any Java IDE
-
-3. Make sure Java 21 is installed
-
-4. Run the application:
-
-* Right-click `CampusTaskboardApplication.java`
-* Click **Run**
-
-5. The application will start at:
-
-```
 http://localhost:8080
-```
 
 ---
 
-## 📡 API Endpoints
+API Versioning
 
-### 🔹 Get All Tasks
+Version 1 endpoints use:
 
-```
+/api/v1/tasks
+
+This allows future API versions without breaking older clients.
+
+---
+
+Security
+
+Spring Security is configured for the application.
+
+Allowed public endpoints:
+
+/api/tasks/**  
+/api/v1/tasks/**  
+/h2-console/**  
+/actuator/**  
+/swagger-ui/**  
+/v3/api-docs/**
+
+CORS is enabled for:
+
+http://localhost:3000  
+http://localhost:8080
+
+---
+
+Swagger Documentation
+
+Swagger UI:
+
+http://localhost:8080/swagger-ui/index.html
+
+OpenAPI JSON:
+
+http://localhost:8080/v3/api-docs
+
+---
+
+# H2 Database Console
+
+http://localhost:8080/h2-console
+
+Example configuration:
+
+JDBC URL: jdbc:h2:mem:testdb  
+Username: sa  
+Password:
+
+---
+
+Endpoints
+
+---
+
+Get All Tasks
+
+### Request
+
 GET /api/tasks
-```
 
----
+or
 
-### 🔹 Get Task by ID
+GET /api/v1/tasks
 
-```
-GET /api/tasks/{id}
-```
-
----
-
-### 🔹 Create Task
-
-```
-POST /api/tasks
-```
-
-Example request:
+### Example Response
 
 ```json
+[
+  {
+    "id": 1,
+    "title": "Homework",
+    "description": "Finish Java assignment",
+    "completed": false,
+    "priority": "HIGH"
+  }
+]
+
+
+---
+### Get Task By ID
+Request
+
+GET /api/tasks/{id}
+
+Example
+
+GET /api/tasks/1
+
+Example Response
 {
-  "title": "Complete Homework 7",
-  "description": "Finish API",
+  "id": 1,
+  "title": "Homework",
+  "description": "Finish Java assignment",
+  "completed": false,
   "priority": "HIGH"
 }
-```
-
 ---
+###Create Task
+Request
 
-### 🔹 Update Task
+POST /api/tasks
 
-```
-PUT /api/tasks/{id}
-```
-
----
-
-### 🔹 Delete Task (Soft Delete)
-
-```
-DELETE /api/tasks/{id}
-```
-
----
-
-### 🔹 Restore Task
-
-```
-PUT /api/tasks/{id}/restore
-```
-
----
-
-## 📊 Actuator Endpoints
-
-```
-/actuator/health
-/actuator/info
-/actuator/metrics
-```
-
-Example response:
-
-```json
+Request Body
 {
-  "status": "UP"
+  "title": "Study",
+  "description": "Prepare for exam",
+  "completed": false,
+  "priority": "HIGH"
 }
-```
-
----
-
-## ⚠️ Validation Rules
-
-* Title must not be blank
-* Title must be between 3 and 100 characters
-* Description must not exceed 500 characters
-
----
-
-## ❌ Example Error Responses
-
-### 404 Not Found
-
-```json
+Example Response
 {
+  "id": 1,
+  "title": "Study",
+  "description": "Prepare for exam",
+  "completed": false,
+  "priority": "HIGH"
+}
+---
+###Update Task
+Request
+
+PUT /api/tasks/{id}
+
+Example
+
+PUT /api/tasks/1
+
+Request Body
+{
+  "title": "Updated Task",
+  "description": "Updated description",
+  "completed": true,
+  "priority": "MEDIUM"
+}
+---
+###Delete Task
+Request
+
+DELETE /api/tasks/{id}
+
+Example
+
+DELETE /api/tasks/1
+
+Soft delete is used, meaning tasks are marked as deleted instead of permanently removed.
+---
+###Restore Task
+Request
+
+PUT /api/tasks/{id}/restore
+
+Example
+
+PUT /api/tasks/1/restore
+
+---
+###Validation Rules
+Title
+Cannot be blank
+Minimum length: 3
+Maximum length: 100
+Description
+Maximum length: 500
+Priority
+
+Allowed values:
+
+LOW
+MEDIUM
+HIGH
+
+Custom validation is implemented using:
+
+@ValidPriority
+
+---
+###Error Responses
+
+##400 Bad Request
+{
+  "timestamp": "2026-05-08T12:00:00",
+  "status": 400,
+  "error": "Bad Request",
+  "message": "Validation failed"
+}
+---
+##404 Not Found
+{
+  "timestamp": "2026-05-08T12:00:00",
   "status": 404,
   "error": "Not Found",
-  "message": "Task with ID 10 not found",
-  "path": "/api/tasks/10"
+  "message": "Task not found"
 }
-```
-
 ---
-
-### 400 Validation Error
-
-```json
+##500 Internal Server Error
 {
-  "status": 400,
-  "error": "Validation Failed",
-  "message": "Input validation failed",
-  "errors": {
-    "title": "Title must be between 3 and 100 characters"
-  }
-}
-```
-
----
-
-### 500 Internal Server Error
-
-```json
-{
+  "timestamp": "2026-05-08T12:00:00",
   "status": 500,
   "error": "Internal Server Error",
-  "message": "An unexpected error occurred",
-  "path": "/api/tasks"
+  "message": "Unexpected error occurred"
 }
-```
-
 ---
+###Testing
+
+Integration tests were implemented using:
+
+JUnit 5
+Spring Boot Test
+MockMvc
+
+Tested functionality includes:
+
+Creating tasks
+Retrieving tasks
+Validation errors
+Not found responses
+---
+
+
+###Running the Application
+git clone https://github.com/jmzla/HW7.git
+
+Open Project
+
+Open the project in IntelliJ IDEA.
+
+##Run Application
+
+Run:
+
+CampusTaskboardApplication.java
+
+Application runs on:
+
+http://localhost:8080
+
+##Monitoring
+
+Spring Boot Actuator endpoints:
+
+/actuator/health
+/actuator/info
+
 
 ## 📸 Screenshots Included
 
-* 404 error response
-* 400 validation error
-* 500 internal error
-* Soft delete working
-* Health endpoint (`/actuator/health`)
-* Request logging in console
+
 
 ---
 
 ## 🎥 Video Explanation
 
 👉 Video Link:
-https://www.youtube.com/watch?v=Uiub3J9hIHA
+
 
