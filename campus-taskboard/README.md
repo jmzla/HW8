@@ -232,15 +232,18 @@ Custom validation is implemented using:
 ### Error Responses
 
 ## 400 Bad Request
+```json{
 {
 "timestamp": "2026-05-08T12:00:00",
 "status": 400,
 "error": "Bad Request",
 "message": "Validation failed"
 }
+```
 ---
 ## 404 Not Found
 ```json{
+{
 "timestamp": "2026-05-08T12:00:00",
 "status": 404,
 "error": "Not Found",
@@ -250,6 +253,7 @@ Custom validation is implemented using:
 ---
 ## 500 Internal Server Error
 ```json{
+{
 "timestamp": "2026-05-08T12:00:00",
 "status": 500,
 "error": "Internal Server Error",
