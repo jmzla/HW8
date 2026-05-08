@@ -104,26 +104,26 @@ Password:
 
 ## Endpoints
 
-Get All Tasks
+## Get All Tasks
 
-# Request
+Request
 
 GET /api/tasks
 
 or
 
 GET /api/v1/tasks
-# Example Response
-json
-[
-  {
-    "id": 1,
-    "title": "Homework",
-    "description": "Finish Java assignment",
-    "completed": false,
-    "priority": "HIGH"
-  }
+## Example Response
+```json{[
+{
+"id": 1,
+"title": "Homework",
+"description": "Finish Java assignment",
+"completed": false,
+"priority": "HIGH"
+}
 ]
+```
 ---
 ### Get Task By ID
 Request
@@ -135,14 +135,14 @@ Example
 GET /api/tasks/1
 
 Example Response
-{
+```json{
 "id": 1,
 "title": "Homework",
 "description": "Finish Java assignment",
 "completed": false,
 "priority": "HIGH"
 }
-
+```
 ---
 ### Create Task
 Request
@@ -150,13 +150,16 @@ Request
 POST /api/tasks
 
 Request Body
+```json{
 {
 "title": "Study",
 "description": "Prepare for exam",
 "completed": false,
 "priority": "HIGH"
 }
+```
 Example Response
+```json{
 {
 "id": 1,
 "title": "Study",
@@ -164,6 +167,7 @@ Example Response
 "completed": false,
 "priority": "HIGH"
 }
+```
 ---
 ### Update Task
 Request
@@ -175,12 +179,14 @@ Example
 PUT /api/tasks/1
 
 Request Body
+```json{
 {
 "title": "Updated Task",
 "description": "Updated description",
 "completed": true,
 "priority": "MEDIUM"
 }
+```
 ---
 ### Delete Task
 Request
@@ -234,20 +240,22 @@ Custom validation is implemented using:
 }
 ---
 ## 404 Not Found
-{
+```json{
 "timestamp": "2026-05-08T12:00:00",
 "status": 404,
 "error": "Not Found",
 "message": "Task not found"
 }
+```
 ---
 ## 500 Internal Server Error
-{
+```json{
 "timestamp": "2026-05-08T12:00:00",
 "status": 500,
 "error": "Internal Server Error",
 "message": "Unexpected error occurred"
 }
+```
 ---
 ### Testing
 
