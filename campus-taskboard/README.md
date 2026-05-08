@@ -8,7 +8,7 @@ This project was developed for Homework 8 and builds upon Homework 7 enhancement
 
 ---
 
-Technologies Used
+## Technologies Used
 - 
 - Java 21
 - Spring Boot 3
@@ -23,7 +23,7 @@ Technologies Used
 
 ---
 
-Features
+## Features
 
 - RESTful API design
 - Spring Security integration
@@ -42,13 +42,13 @@ Features
 
 ---
 
-Base URL
+## Base URL
 
 http://localhost:8080
 
 ---
 
-API Versioning
+## API Versioning
 
 Version 1 endpoints use:
 
@@ -58,7 +58,7 @@ This allows future API versions without breaking older clients.
 
 ---
 
-Security
+## Security
 
 Spring Security is configured for the application.
 
@@ -78,7 +78,7 @@ http://localhost:8080
 
 ---
 
-Swagger Documentation
+## Swagger Documentation
 
 Swagger UI:
 
@@ -90,7 +90,7 @@ http://localhost:8080/v3/api-docs
 
 ---
 
-# H2 Database Console
+## H2 Database Console
 
 http://localhost:8080/h2-console
 
@@ -102,23 +102,19 @@ Password:
 
 ---
 
-Endpoints
-
----
+## Endpoints
 
 Get All Tasks
 
-### Request
+# Request
 
 GET /api/tasks
 
 or
 
 GET /api/v1/tasks
-
-### Example Response
-
-```json
+# Example Response
+json
 [
   {
     "id": 1,
@@ -128,8 +124,6 @@ GET /api/v1/tasks
     "priority": "HIGH"
   }
 ]
-
-
 ---
 ### Get Task By ID
 Request
@@ -142,35 +136,36 @@ GET /api/tasks/1
 
 Example Response
 {
-  "id": 1,
-  "title": "Homework",
-  "description": "Finish Java assignment",
-  "completed": false,
-  "priority": "HIGH"
+"id": 1,
+"title": "Homework",
+"description": "Finish Java assignment",
+"completed": false,
+"priority": "HIGH"
 }
+
 ---
-###Create Task
+### Create Task
 Request
 
 POST /api/tasks
 
 Request Body
 {
-  "title": "Study",
-  "description": "Prepare for exam",
-  "completed": false,
-  "priority": "HIGH"
+"title": "Study",
+"description": "Prepare for exam",
+"completed": false,
+"priority": "HIGH"
 }
 Example Response
 {
-  "id": 1,
-  "title": "Study",
-  "description": "Prepare for exam",
-  "completed": false,
-  "priority": "HIGH"
+"id": 1,
+"title": "Study",
+"description": "Prepare for exam",
+"completed": false,
+"priority": "HIGH"
 }
 ---
-###Update Task
+### Update Task
 Request
 
 PUT /api/tasks/{id}
@@ -181,13 +176,13 @@ PUT /api/tasks/1
 
 Request Body
 {
-  "title": "Updated Task",
-  "description": "Updated description",
-  "completed": true,
-  "priority": "MEDIUM"
+"title": "Updated Task",
+"description": "Updated description",
+"completed": true,
+"priority": "MEDIUM"
 }
 ---
-###Delete Task
+### Delete Task
 Request
 
 DELETE /api/tasks/{id}
@@ -198,7 +193,7 @@ DELETE /api/tasks/1
 
 Soft delete is used, meaning tasks are marked as deleted instead of permanently removed.
 ---
-###Restore Task
+### Restore Task
 Request
 
 PUT /api/tasks/{id}/restore
@@ -208,7 +203,7 @@ Example
 PUT /api/tasks/1/restore
 
 ---
-###Validation Rules
+### Validation Rules
 Title
 Cannot be blank
 Minimum length: 3
@@ -228,33 +223,33 @@ Custom validation is implemented using:
 @ValidPriority
 
 ---
-###Error Responses
+### Error Responses
 
-##400 Bad Request
+## 400 Bad Request
 {
-  "timestamp": "2026-05-08T12:00:00",
-  "status": 400,
-  "error": "Bad Request",
-  "message": "Validation failed"
+"timestamp": "2026-05-08T12:00:00",
+"status": 400,
+"error": "Bad Request",
+"message": "Validation failed"
 }
 ---
-##404 Not Found
+## 404 Not Found
 {
-  "timestamp": "2026-05-08T12:00:00",
-  "status": 404,
-  "error": "Not Found",
-  "message": "Task not found"
+"timestamp": "2026-05-08T12:00:00",
+"status": 404,
+"error": "Not Found",
+"message": "Task not found"
 }
 ---
-##500 Internal Server Error
+## 500 Internal Server Error
 {
-  "timestamp": "2026-05-08T12:00:00",
-  "status": 500,
-  "error": "Internal Server Error",
-  "message": "Unexpected error occurred"
+"timestamp": "2026-05-08T12:00:00",
+"status": 500,
+"error": "Internal Server Error",
+"message": "Unexpected error occurred"
 }
 ---
-###Testing
+### Testing
 
 Integration tests were implemented using:
 
@@ -271,14 +266,14 @@ Not found responses
 ---
 
 
-###Running the Application
+### Running the Application
 git clone https://github.com/jmzla/HW7.git
 
 Open Project
 
 Open the project in IntelliJ IDEA.
 
-##Run Application
+### Run Application
 
 Run:
 
@@ -288,7 +283,7 @@ Application runs on:
 
 http://localhost:8080
 
-##Monitoring
+## Monitoring
 
 Spring Boot Actuator endpoints:
 
@@ -305,5 +300,4 @@ Spring Boot Actuator endpoints:
 ## 🎥 Video Explanation
 
 👉 Video Link:
-
 
