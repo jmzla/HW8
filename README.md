@@ -279,7 +279,7 @@ Not found responses
 
 
 ### Running the Application
-git clone https://github.com/jmzla/HW7.git
+git clone https://github.com/jmzla/HW8.git
 
 Open Project
 
@@ -312,4 +312,4 @@ Spring Boot Actuator endpoints:
 ## 🎥 Video Explanation
 
 👉 Video Link:
-
+https://www.youtube.com/watch?v=Exo2gcLZZnQ
